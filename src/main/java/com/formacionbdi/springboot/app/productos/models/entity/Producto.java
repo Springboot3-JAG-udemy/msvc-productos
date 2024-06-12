@@ -18,6 +18,11 @@ public class Producto implements Serializable {
     @Temporal(TemporalType.DATE) // Formato en el que se guardara la fecha
     private Date createAt;
 
+    // Como no es propiedad de la BD, indica que no está mapeado a ningun campo de
+    // la BD
+    @Transient
+    private Integer port;
+
     public Long getId() {
         return id;
     }
@@ -48,5 +53,13 @@ public class Producto implements Serializable {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
     }
 }
