@@ -1,6 +1,6 @@
 package com.formacionbdi.springboot.app.productos.models.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
