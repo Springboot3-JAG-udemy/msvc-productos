@@ -4,6 +4,7 @@ import com.formacionbdi.springboot.app.productos.models.entity.Producto;
 import com.formacionbdi.springboot.app.productos.models.service.IProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,10 @@ public class ProductoController {
     // Value es para inyectar valores que tenemos configurados en los properties
     @Value("${server.port}")
     private Integer port;
+    
+    // Para obtener el puerto dinamico del servidor
+    @Autowired
+    private ServletWebServerApplicationContext webServerAppCtxt;
 
     @Autowired
     private IProductoService productoService;
@@ -30,7 +35,8 @@ public class ProductoController {
     public List<Producto> listar() {
         return productoService.findAll().stream().map(producto -> {
             // producto.setPort(Integer.parseInt(env.getProperty("local.server.port")));
-            producto.setPort(port);
+            // producto.setPort(port);
+            producto.setPort(webServerAppCtxt.getWebServer().getPort());
             return producto;
         }).collect(Collectors.toList());
     }
@@ -42,7 +48,8 @@ public class ProductoController {
 
         // Setear puerto
         // producto.setPort(Integer.parseInt(env.getProperty("local.server.port")));
-        producto.setPort(port);
+        // producto.setPort(port);
+        producto.setPort(webServerAppCtxt.getWebServer().getPort());
 
         return producto;
     }
