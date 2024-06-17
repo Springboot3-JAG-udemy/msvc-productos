@@ -51,6 +51,13 @@ public class ProductoController {
         // producto.setPort(port);
         producto.setPort(webServerAppCtxt.getWebServer().getPort());
 
+        // Simular error
+        boolean ok = false;
+
+        // if(!ok) {
+        //     throw new RuntimeException("No se pudo cargar el producto");
+        // }
+
         return producto;
     }
 
